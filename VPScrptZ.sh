@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Original script by fornesia, rzengineer and fawzya 
-# Mod by shigeno for Adding OCS Panel
+# Mod by Koroi for Adding OCS Panel
 # 
 # ==================================================
 
@@ -14,13 +14,13 @@ MYIP=$(wget -qO- ipv4.icanhazip.com);
 MYIP2="s/xxxxxxxxx/$MYIP/g";
 
 #detail nama perusahaan
-country=ID
-state=Manila
-locality=Manila
-organization=ShigenoVPN
+country=MY
+state=Kedah
+locality=Kuala Lumpur
+organization=KoroiVPN
 organizationalunit=IT
-commonname=shigenovpn.ml
-email=shigenojohn@gmail.com
+commonname=koroivpn.ml
+email=koroivpn@gmail.com
 
 # go to root
 cd
@@ -32,15 +32,15 @@ sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 # install wget and curl
 apt-get update;apt-get -y install wget curl;
 
-# set time GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Manila /etc/localtime
+# set time GMT +8
+ln -fs /usr/share/zoneinfo/Asia/Kuala Lumpur /etc/localtime
 
 # set locale
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 # set repo
-wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/shigeno143/VPSAutoScrptz/master/sources.list.debian8"
+wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/aliepmoses/debian8/master/sources.list.debian8"
 wget "http://www.dotdeb.org/dotdeb.gpg"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
@@ -62,7 +62,7 @@ echo 'echo -e "   #  ###  #  # # ##  # # # # "' >> .bashrc
 echo 'echo -e "    # # #  #  # # #   # # # # "' >> .bashrc
 echo 'echo -e "  ##  # # ###  ## ### # #  #  "' >> .bashrc
 echo 'echo -e "welcome to the server $HOSTNAME" | lolcat' >> .bashrc
-echo 'echo -e "Script mod by shigeno"' >> .bashrc
+echo 'echo -e "Script mod by Koroi"' >> .bashrc
 echo 'echo -e "Type menu to display a list of commands"' >> .bashrc
 echo 'echo -e ""' >> .bashrc
 
@@ -70,17 +70,17 @@ echo 'echo -e ""' >> .bashrc
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/shigeno143/VPSAutoScrptz/master/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/aliepmoses/debian8/master/nginx.conf"
 mkdir -p /home/vps/public_html
 echo "<pre>Setup by shigeno</pre>" > /home/vps/public_html/index.html
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/shigeno143/VPSAutoScrptz/master/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/aliepmoses/debian8/master/vps.conf"
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/shigeno143/VPSAutoScrptz/master/openvpn-debian.tar"
+wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/aliepmoses/debian8/master/openvpn-debian.tar"
 cd /etc/openvpn/
 tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/shigeno143/VPSAutoScrptz/master/1194.conf"
+wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/aliepmoses/debian8/master/1194.conf"
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
